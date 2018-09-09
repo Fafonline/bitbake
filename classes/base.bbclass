@@ -6,6 +6,7 @@ do_configure[stamp-extra-info] = "${PN}"
 do_clean[stamp-extra-info] = "${PN}"
 do_build[stamp-extra-info] = "${PN}"
 do_populate_sysroot[stamp-extra-info] = "${PN}"
+do_configure[deptask] = "do_populate_sysroot"
 
 addtask do_fetch
 base_do_fetch() {
