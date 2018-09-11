@@ -18,9 +18,12 @@ python do_build () {
 }
 
 python do_print () {
-	bb.plain("Print")
+	bb.plain("PCIe Print")
 }
 
 python do_populate_sysroot() {
 	bb.plain("PCIeAccess Populate sysroot")
+}
+python do_pack () {
+	bb.plain("PCIeAccess pack")
 }

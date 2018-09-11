@@ -18,10 +18,9 @@ python do_build () {
 	bb.plain("dltwrapper Build")
 }
 
-python do_print () {
-	bb.plain("Print")
-}
-
 python do_populate_sysroot() {
 	bb.plain("dltwrapper Populate sysroot")
+}
+python do_pack () {
+	bb.plain("dltwrapper pack")
 }
