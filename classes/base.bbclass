@@ -32,3 +32,17 @@ do_populate_sysroot[dirs]  = "${SYSROOT}"
 do_populate_sysroot() {
 	:
 }
+
+addtask do_pack after do_populate_sysroot
+do_pack[cleandirs] ="${PACKAGEDIR}"
+base_do_pack () {
+	:
+}
+
+addtask do_rpm after do_pack
+do_rpm[dirs] = "${RPMBUILD}/BUILD  ${RPMBUILD}/BUILDROOT ${RPMBUILD}/SOURCES ${RPMBUILD}/SPECS ${RPMBUILD}/SRPMS"
+base_do_rpm () {
+	:
+}
+
+ 
