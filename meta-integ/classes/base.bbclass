@@ -82,7 +82,7 @@ python base_do_build () {
 	bb.note("Try running the 'listtasks' task against a .bb to see what tasks are defined.")
 }
 addtask do_populate_sysroot after do_build
-do_populate_sysroot[dirs]  = "${SYSROOT}"
+do_populate_sysroot[dirs]  = "${SYSROOT} ${SYSROOT}/${libdir} ${SYSROOT}/${includedir} ${SYSROOT}/${packagedir}"
 do_populate_sysroot[deptask] = "do_populate_sysroot"
 python base_do_populate_sysroot() {
 	bb.plain("Base Populate sysroot")
@@ -102,4 +102,4 @@ base_do_rpm () {
 }
 
 
-EXPORT_FUNCTIONS do_clean do_mrproper do_build do_populate_sysroot do_pack do_rpm
+EXPORT_FUNCTIONS do_fetch do_configure do_clean do_mrproper do_build do_populate_sysroot do_pack do_rpm
