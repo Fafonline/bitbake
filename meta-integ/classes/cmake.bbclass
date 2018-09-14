@@ -1,11 +1,28 @@
 EXTRA_CMAKE = "-DCMAKE_INSTALL_LIBDIR=${libdir}"
 EXTRA_CMAKE += "-DCMAKE_INSTALL_PREFIX=${ROOT_INSTALL_DIR}"
 
+
+cmake_do_fetch () {
+	git clone ${SRC_URI} ${WORKDIR}/${PN}-${PV}-${PR}
+	cd ${WORKDIR}/${PN}-${PV}-${PR}
+	git checkout ${SRCREV} 
+}
+
+addtask do_prep before do_configure
+# cmake_do_prep () {
+# 	cd ${S}
+# 	rm -R CMakeFiles  CMakeCache.txt cmake_install.cmake Makefile
+# 	toto
+# }
+
+python cmake_do_prep () {
+	bb.plain("Prep")
+}
+
 cmake_do_configure () {
 	cd ${S}
 	export PKG_CONFIG_PATH="${SYSROOT}/${packagedir}"
 	export PKG_CONFIG_SYSROOT_DIR="${SYSROOT}"
-    echo `pkg-config automotive-dlt --cflags` > /tmp/bitbake.log
 	cmake ${EXTRA_CMAKE} .
 }
 
@@ -17,6 +34,12 @@ cmake_do_clean () {
 cmake_do_build () {
 	cd ${S}
 	make
+}
+
+
+cmake_do_populate_sysroot() {
+	cd ${S}
+	make install DESTDIR=${DESTDIR}
 }
 # cmake_do_populate_sysroot () {
 # 	cd ${S}
@@ -37,4 +60,4 @@ cmake_do_build () {
 # pythoncmake_do_populate_sysroot () {
 # 	bb.plain("cmake populate sysroot")
 # }
-EXPORT_FUNCTIONS do_configure do_clean do_build do_populate_sysroot
+EXPORT_FUNCTIONS do_fetch do_prep do_configure do_clean do_build do_populate_sysroot

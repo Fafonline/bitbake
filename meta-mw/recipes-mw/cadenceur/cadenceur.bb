@@ -16,8 +16,3 @@ do_fetch () {
 }
 
 inherit cmake
-
-do_populate_sysroot() {
-	cd ${S}
-	make install DESTDIR=${DESTDIR}
-}
