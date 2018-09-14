@@ -4,7 +4,8 @@ EXTRA_CMAKE += "-DCMAKE_INSTALL_PREFIX=${ROOT_INSTALL_DIR}"
 cmake_do_configure () {
 	cd ${S}
 	export PKG_CONFIG_PATH="${SYSROOT}/${packagedir}"
-	echo $PKG_CONFIG_PATH > /tmp/bitbake.log
+	export PKG_CONFIG_SYSROOT_DIR="${SYSROOT}"
+    echo `pkg-config automotive-dlt --cflags` > /tmp/bitbake.log
 	cmake ${EXTRA_CMAKE} .
 }
 

@@ -101,5 +101,4 @@ base_do_rpm () {
 	:
 }
 
-
 EXPORT_FUNCTIONS do_fetch do_configure do_clean do_mrproper do_build do_populate_sysroot do_pack do_rpm
