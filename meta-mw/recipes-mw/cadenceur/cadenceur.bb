@@ -2,27 +2,22 @@ DESCRIPTION = "Full Baguera-ng  cadenceur"
 DEPENDS = "PCIeAccess dltwrapper"
 
 PN = "cadenceur"
-python do_fetch() {
-	bb.plain("Cadenceur Fetch")
+#SRCREV="824084a85137f71baa4cb160e97212a6ecdc4df9"
+
+SRCREV= "--track origin/FAL_DEV-bitbake"
+SRC_URI="http://tfs2017:8080/tfs/DefaultCollection/_git/BAGUERA"
+
+S = "${WORKDIR}/${PN}-${PV}-${PR}/CPU/src/cadenceur"
+
+do_fetch () {
+	git clone ${SRC_URI} ${WORKDIR}/${PN}-${PV}-${PR}
+	cd ${WORKDIR}/${PN}-${PV}-${PR}
+	git checkout ${SRCREV} 
 }
 
-# python do_configure () {
-# 	bb.plain("Cadenceur Configure")
-# }
-
-# python do_clean () {
-# 	bb.plain("Cadenceur Clean")
-# }
-
-# python do_build () {
-# 	bb.plain("Cadenceur Build")
-# }
-
-# python do_populate_sysroot() {
-# 	bb.plain("Cadenceur Populate sysroot")
-# }
-
-python do_pack () {
-	bb.plain("Cadenceur pack")
-}
 inherit cmake
+
+do_populate_sysroot() {
+	cd ${S}
+	make install DESTDIR=${DESTDIR}
+}

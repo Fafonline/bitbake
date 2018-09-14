@@ -2,28 +2,25 @@ DESCRIPTION = "PCIeAccess driver library"
 DEPENDS = ""
 PN = "PCIeAccess"
 
-python do_fetch() {
-	bb.plain("PCIeAccess Fetch")
-}
-python do_configure () {
-	bb.plain("PCIeAccess Configure")
+#SRCREV="824084a85137f71baa4cb160e97212a6ecdc4df9"
+SRCREV= "--track origin/FAL_DEV-bitbake"
+SRC_URI="http://tfs2017:8080/tfs/DefaultCollection/_git/BAGUERA"
+
+S = "${WORKDIR}/${PN}-${PV}-${PR}/CPU/src/PCIeAccess"
+
+do_fetch () {
+	git clone ${SRC_URI} ${WORKDIR}/${PN}-${PV}-${PR}
+	cd ${WORKDIR}/${PN}-${PV}-${PR}
+	git checkout ${SRCREV} 
 }
 
-python do_clean () {
-	bb.plain("PCIeAccess Clean")
+do_build () {
+	cd ${S}
+	make
 }
 
-python do_build () {
-	bb.plain("PCIeAccess Build")
-}
 
-python do_print () {
-	bb.plain("PCIe Print")
-}
-
-python do_populate_sysroot() {
-	bb.plain("PCIeAccess Populate sysroot")
-}
-python do_pack () {
-	bb.plain("PCIeAccess pack")
+do_populate_sysroot() {
+	cd ${S}
+	 ./install.sh Debug ${DESTDIR}
 }
