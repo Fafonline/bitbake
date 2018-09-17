@@ -16,18 +16,14 @@ Full Baguera-ng package
 %setup -q
 %build
 %install
+#cp -R * $RPM_BUILD_ROOT/.
 
-install -m 777 -d $RPM_BUILD_ROOT/tmp
-install -m 777 -d $RPM_BUILD_ROOT/tmp/usr
-install -m 777 -d $RPM_BUILD_ROOT/tmp/usr/src
-install -m 777  usr/src/main.c $RPM_BUILD_ROOT/tmp/usr/src/main.c
-install -m 777  usr/src/main.h $RPM_BUILD_ROOT/tmp/usr/src/main.h
-
-
+find %buildroot -type f \( -name '*.so' -o -name '*.so.*' \) -exec chmod 755 {} +
 
 %files
-/tmp/usr/src/main.c
-/tmp/usr/src/main.h
+/*
+
+
 %doc
 
 

@@ -30,6 +30,7 @@ do_pack () {
 	 tar -cvf  ${PACKAGEDIR}/${PN}-${PR}.${PV}.tar  . --transform='s/^\./${PN}-${PR}/g'
 }
 
+do_rpm[nostamp] = "1"
 do_rpm (){
 	cp ${TOPDIR}/src/image.spec ${RPMBUILD}/SPECS
 	cp ${PACKAGEDIR}/${PN}-${PR}.${PV}.tar ${RPMBUILD}/SOURCES
