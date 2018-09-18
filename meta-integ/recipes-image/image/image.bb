@@ -41,5 +41,5 @@ do_rpm (){
 # Empaquetage, contrôles des %files
 	rpmbuild --define "_topdir ${RPMBUILD}" -bi --short-circuit ${RPMBUILD}/SPECS/image.spec
 # construction des fichiers RPM (cette dernière commande va exécuter de nouveau les procédures précédentes)
-	rpmbuild --define "_topdir ${RPMBUILD}" -ba ${RPMBUILD}/SPECS/image.spec
+	rpmbuild --define "_topdir ${RPMBUILD}"  --define "debug_package %{nil}" -ba ${RPMBUILD}/SPECS/image.spec
 }
