@@ -1,11 +1,11 @@
-Name:image		
-Version:3	
-Release:14
+Name:baguera-ng.image-full		
+Version:0	
+Release:0
 Summary: Baguera Package
 
 License: Ineo	
 URL:http://tfs2017:8080/tfs/DefaultCollection/_git/BAGUERA		
-Source0:image-3.14.tar
+Source0:baguera-ng.image-full-0.0.tar
 
 
 %description
@@ -16,16 +16,16 @@ Full Baguera-ng package
 %setup -q
 %build
 %install
-#cp -R * $RPM_BUILD_ROOT/.
+cp -R * $RPM_BUILD_ROOT/.
 
 find %buildroot -type f \( -name '*.so' -o -name '*.so.*' \) -exec chmod 755 {} +
 
-%files
-/*
+%post
 
-
-%doc
-
+depmod -a
+ls /etc/systemd/system | grep baguera-ng | xargs -i systemctl enable {}
+echo "Post install script success" `date` > /tmp/install.log
 
 %changelog
 
+%files

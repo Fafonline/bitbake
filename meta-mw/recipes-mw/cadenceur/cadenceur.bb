@@ -1,4 +1,4 @@
-DESCRIPTION = "Full Baguera-ng  cadenceur"
+DESCRIPTION = "Baguera-ng  cadenceur"
 DEPENDS = "PCIeAccess dltwrapper"
 
 PN = "cadenceur"
@@ -7,12 +7,6 @@ PN = "cadenceur"
 SRCREV= "--track origin/FAL_DEV-bitbake"
 SRC_URI="http://tfs2017:8080/tfs/DefaultCollection/_git/BAGUERA"
 
-S = "${WORKDIR}/${PN}-${PV}-${PR}/CPU/src/cadenceur"
-
-do_fetch () {
-	git clone ${SRC_URI} ${WORKDIR}/${PN}-${PV}-${PR}
-	cd ${WORKDIR}/${PN}-${PV}-${PR}
-	git checkout ${SRCREV} 
-}
+S = "${WORKDIR}/${PN}-${PV}-${PR}/src/cadenceur"
 
 inherit cmake
